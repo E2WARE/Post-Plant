@@ -1,0 +1,43 @@
+[
+    {
+      "mapName": "Ascent",
+      "imagePath": "assets/maps_images/ascent.jpg"
+    },
+    {
+      "mapName": "Bind",
+      "imagePath": "assets/maps_images/bind.jpg"
+    },
+    {
+      "mapName": "Breeze",
+      "imagePath": "assets/maps_images/breeze.jpg"
+    },
+    {
+      "mapName": "Fracture",
+      "imagePath": "assets/maps_images/fracture.jpg"
+    },
+    {
+      "mapName": "Haven",
+      "imagePath": "assets/maps_images/haven.jpg"
+    },
+    {
+      "mapName": "Icebox",
+      "imagePath": "assets/maps_images/icebox.jpg"
+    },
+    {
+      "mapName": "Lotus",
+      "imagePath": "assets/maps_images/lotus.jpg"
+    },
+    {
+      "mapName": "Pearl",
+      "imagePath": "assets/maps_images/pearl.jpg"
+    },
+    {
+      "mapName": "Split",
+      "imagePath": "assets/maps_images/split.jpg"
+    },
+    {
+      "mapName": "Sunset",
+      "imagePath": "assets/maps_images/sunset.jpg"
+    }
+  ]
+  

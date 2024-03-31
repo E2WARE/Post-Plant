@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21562823767",
+    "project_id": "postplant-lineup",
+    "storage_bucket": "postplant-lineup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21562823767:android:07763a95daba489745bf12",
+        "android_client_info": {
+          "package_name": "com.example.postplantlineup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBuwszzc-1Ar_wuBUQjBJV1VM8x5yFnLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

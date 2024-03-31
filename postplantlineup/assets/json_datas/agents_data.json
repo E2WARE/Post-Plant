@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Brimstone",
+    "imagePath": "assets/agent_images/Brimstone.jpeg"
+  },
+  {
+    "name": "Viper",
+    "imagePath": "assets/agent_images/Viper.jpeg"
+  },
+  {
+    "name": "Omen",
+    "imagePath": "assets/agent_images/Omen.jpeg"
+  },
+  {
+    "name": "Killjoy",
+    "imagePath": "assets/agent_images/Killjoy.jpeg"
+  },
+  {
+    "name": "Cypher",
+    "imagePath": "assets/agent_images/Cypher.jpeg"
+  },
+  {
+    "name": "Sova",
+    "imagePath": "assets/agent_images/Sova.jpeg"
+  },
+  {
+    "name": "Sage",
+    "imagePath": "assets/agent_images/Sage.jpeg"
+  },
+  {
+    "name": "Phoenix",
+    "imagePath": "assets/agent_images/Phoenix.jpeg"
+  },
+  {
+    "name": "Jett",
+    "imagePath": "assets/agent_images/Jett.jpeg"
+  },
+  {
+    "name": "Reyna",
+    "imagePath": "assets/agent_images/Reyna.jpeg"
+  },
+  {
+    "name": "Raze",
+    "imagePath": "assets/agent_images/Raze.jpeg"
+  },
+  {
+    "name": "Breach",
+    "imagePath": "assets/agent_images/Breach.jpeg"
+  },
+  {
+    "name": "Skye",
+    "imagePath": "assets/agent_images/Skye.jpeg"
+  },
+  {
+    "name": "Yoru",
+    "imagePath": "assets/agent_images/Yoru.jpeg"
+  },
+  {
+    "name": "Astra",
+    "imagePath": "assets/agent_images/Astra.jpeg"
+  },
+  {
+    "name": "KAY/O",
+    "imagePath": "assets/agent_images/Kayo.jpeg"
+  },
+  {
+    "name": "Chamber",
+    "imagePath": "assets/agent_images/Chamber.jpeg"
+  },
+  {
+    "name": "Neon",
+    "imagePath": "assets/agent_images/Neon.jpeg"
+  },
+  {
+    "name": "Clove",
+    "imagePath": "assets/agent_images/Clove.jpeg"
+  },
+  {
+    "name": "Fade",
+    "imagePath": "assets/agent_images/Fade.jpeg"
+  },
+  {
+    "name": "Harbor",
+    "imagePath": "assets/agent_images/Harbor.jpeg"
+  },
+  {
+    "name": "Iso",
+    "imagePath": "assets/agent_images/Iso.jpeg"
+  },
+  {
+    "name": "Deadlock",
+    "imagePath": "assets/agent_images/Deadlock.jpeg"
+  },
+  {
+    "name": "Gekko",
+    "imagePath": "assets/agent_images/Gekko.jpeg"
+  }
+]
