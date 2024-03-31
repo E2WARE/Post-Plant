@@ -1,16 +1,13 @@
-# postplantlineup
+# Post Plant
+Bu proje, Flutter kullanılarak geliştirilen bir mobil uygulamadır. Uygulama, Firebase veritabanından veri çeker ve MVVM mimarisini kullanır.
 
-A new Flutter project.
+# Özellikler
+- Firebase veritabanı entegrasyonu
+- MVVM mimarisi
+- Kullanıcı dostu arayüz
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Kullanılan Teknolojiler
+- Flutter
+- Firebase
+- MVVM
+- JSON
