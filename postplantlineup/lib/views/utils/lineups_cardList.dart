@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
 
 List<Widget> buildCards(Map<String, dynamic> data, Function(List<String>) onTap) {
@@ -15,9 +16,14 @@ List<Widget> buildCards(Map<String, dynamic> data, Function(List<String>) onTap)
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: Image.network(
-                  value.split(' , ')[0],
+                child: CachedNetworkImage(
+                  imageUrl: value.split(' , ')[0],
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => Image.network(
+                    value.split(' , ')[1], // Low-resolution placeholder URL from database
+                    fit: BoxFit.cover,
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
               Padding(
@@ -25,7 +31,8 @@ List<Widget> buildCards(Map<String, dynamic> data, Function(List<String>) onTap)
                 child: Text(
                   fieldName,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: CustomColors.textColor,
+                  style: const TextStyle(
+                    color: CustomColors.textColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,
                   ),

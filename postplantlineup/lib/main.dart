@@ -1,7 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:postplantlineup/views/screens/home.dart';
-import 'views/utils/colors.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:postplantlineup/views/utils/colors.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
