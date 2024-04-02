@@ -11,3 +11,4 @@ Bu proje, Flutter kullanılarak geliştirilen bir mobil uygulamadır. Uygulama, 
 - Firebase
 - MVVM
 - JSON
+- ADMOB
