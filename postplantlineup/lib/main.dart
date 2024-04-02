@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:postplantlineup/views/screens/home.dart';
+import 'package:postplantlineup/views/screens/splash_screen.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -10,10 +9,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MainPage());
+  runApp(const MyApp());
 }
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MainPage extends StatelessWidget {
           bodyText1: TextStyle(color: CustomColors.textColor),
         ),
       ),
-      home: const HomePage(),
+      home: const SplashScreen(), // Ana ekrana splash ekranını göster
     );
   }
 }
