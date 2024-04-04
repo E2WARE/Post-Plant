@@ -41,6 +41,8 @@ dependencies:
   firebase_storage: ^11.6.11
   image_picker: ^1.0.7
   video_player: ^2.8.3
+  provider: ^6.1.2
+  curved_navigation_bar: ^1.0.3
 
 
 dev_dependencies:
@@ -67,49 +69,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/maps_images/ascent.jpg
-    - assets/maps_images/bind.jpg
-    - assets/maps_images/breeze.jpg
-    - assets/maps_images/fracture.jpg
-    - assets/maps_images/haven.jpg
-    - assets/maps_images/icebox.jpg
-    - assets/maps_images/lotus.jpg
-    - assets/maps_images/pearl.jpg
-    - assets/maps_images/split.jpg
-    - assets/maps_images/sunset.jpg
-    - assets/agent_images/Phoenix.jpeg
-    - assets/agent_images/Brimstone.jpeg
-    - assets/agent_images/Viper.jpeg
-    - assets/agent_images/Omen.jpeg
-    - assets/agent_images/Killjoy.jpeg
-    - assets/agent_images/Cypher.jpeg
-    - assets/agent_images/Sova.jpeg
-    - assets/agent_images/Sage.jpeg
-    - assets/agent_images/Phoenix.jpeg
-    - assets/agent_images/Jett.jpeg
-    - assets/agent_images/Reyna.jpeg
-    - assets/agent_images/Raze.jpeg
-    - assets/agent_images/Breach.jpeg
-    - assets/agent_images/Skye.jpeg
-    - assets/agent_images/Yoru.jpeg
-    - assets/agent_images/Astra.jpeg
-    - assets/agent_images/Kayo.jpeg
-    - assets/agent_images/Chamber.jpeg
-    - assets/agent_images/Neon.jpeg
-    - assets/agent_images/Clove.jpeg
-    - assets/agent_images/Fade.jpeg
-    - assets/agent_images/Harbor.jpeg
-    - assets/agent_images/Iso.jpeg
-    - assets/agent_images/Deadlock.jpeg
-    - assets/agent_images/Gekko.jpeg
-    - assets/site_images/a_site.jpeg
-    - assets/site_images/b_site.jpeg
-    - assets/site_images/c_site.jpeg
-    - assets/json_datas/agents_data.json
-    - assets/json_datas/card_data.json
-    - assets/json_datas/maps_data.json
-    - assets/json_datas/sites_data.json
-    - assets/splash/isopop.mp4
+    - assets/maps_images/
+    - assets/agent_images/
+    - assets/site_images/
+    - assets/json_datas/
+    - assets/splash/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

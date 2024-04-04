@@ -1,49 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../utils/colors.dart';
 import '../../data/agents_data_service.dart';
 import '../../models/agents_model.dart';
+import '../utils/slide_page_route.dart';
 import '../widgets/agents_grid_view_widget.dart';
+import 'home.dart';
 
 class AgentsPage extends StatelessWidget {
-  const AgentsPage({super.key});
+  const AgentsPage({Key? key});
+
+
   @override
   Widget build(BuildContext context) {
+
+    final double appBarFontSize = MediaQuery.of(context).size.width * 0.05;
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return FutureBuilder<List<Agent>>(
       future: AgentsDataService().getAgents(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'post-plant',
-            theme: ThemeData(
-              brightness: Brightness.light,
-              primaryColor: CustomColors.primaryColor,
-              textTheme: const TextTheme(
-                bodyText1: TextStyle(color: CustomColors.textColor),
-              ),
-            ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              primaryColor: CustomColors.primaryColor,
-              textTheme: const TextTheme(
-                bodyText1: TextStyle(color: CustomColors.textColor),
-              ),
-            ),
-            home: Scaffold(
-              appBar: AppBar(
-                title: const Text(
-                  'Agents',
-                  style: TextStyle(color: Colors.white),
-                ),
-                backgroundColor: CustomColors.primaryColor,
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text(
+                'Agents',
+                style: TextStyle(color: Colors.white),
               ),
               backgroundColor: CustomColors.primaryColor,
-              body: AgentsGridViewWidget(
-                agents: snapshot.data!,
-                onAgentSelected: (String agentName) {
-                  // Handle agent selection
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  // Ana sayfaya animasyonlu geçiş
+                  Navigator.pushReplacement(
+                    context,
+                    SlidePageRoute(page: const HomePage()),
+                  );
                 },
               ),
+            ),
+            backgroundColor: CustomColors.primaryColor,
+            body: AgentsGridViewWidget(
+              agents: snapshot.data!,
+              onAgentSelected: (String agentName) {
+                // Handle agent selection
+              },
             ),
           );
         } else if (snapshot.hasError) {

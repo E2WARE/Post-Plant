@@ -1,11 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:postplantlineup/views/screens/sites_dart.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
 import 'package:postplantlineup/view_models/site_view_model.dart';
 import '../../data/lineups_data_service.dart';
 import '../../view_models/agents_view_model.dart';
 import '../../view_models/map_view_model.dart';
 import '../utils/lineups_cardList.dart';
+import '../utils/slide_page_route.dart';
 import 'lineups_full_screen.dart';
 
 class LineupPage extends StatelessWidget {
@@ -22,6 +25,11 @@ class LineupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     final agentName = agentCardViewModel.agent.name;
     final mapName = mapCardViewModel.mapName;
     final siteName = siteCardViewModel.site.siteName;
@@ -30,13 +38,26 @@ class LineupPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Lineups',
-          style: TextStyle(color: CustomColors.textColor),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: CustomColors.primaryColor,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            // Ana sayfaya animasyonlu geçiş
+            Navigator.pushReplacement(
+              context,
+              SlidePageRoute(page: SitesPage(agentCardViewModel: agentCardViewModel, mapCardViewModel: mapCardViewModel)),
+            );
+          },
+        ),
       ),
       body: Center(
         child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-          stream: FirebaseService.getSnapshotStream(agentName, mapName, siteName),
+          stream: FirebaseServiceGetData.getSnapshotStream(agentName, mapName, siteName),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
@@ -66,7 +87,12 @@ class LineupPage extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => FullScreenImagePage(urls: urls),
+        builder: (context) => FullScreenImagePage(
+          urls: urls,
+          agentName: agentCardViewModel.agent.name,
+          mapName: mapCardViewModel.mapName,
+          siteName: siteCardViewModel.site.siteName,
+        ),
       ),
     );
   }
