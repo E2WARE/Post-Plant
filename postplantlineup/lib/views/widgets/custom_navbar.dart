@@ -32,6 +32,7 @@ class CustomNavbar extends StatelessWidget {
           Icon(Icons.accessibility_new_outlined, size: iconSize, color: Colors.white,),
           Icon(Icons.account_balance_wallet_outlined, size: iconSize,color: Colors.white,),
           Icon(Icons.adb, size: iconSize,color: Colors.white,),
+          Icon(Icons.favorite, size: iconSize,color: Colors.white,),
         ],
         color: CustomColors.accentColor,
         buttonBackgroundColor: CustomColors.accentColor,

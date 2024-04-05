@@ -12,9 +12,9 @@ class MapsPage extends StatelessWidget {
   final AgentCardViewModel agentCardViewModel;
 
   const MapsPage({
-    Key? key,
+    super.key,
     required this.agentCardViewModel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

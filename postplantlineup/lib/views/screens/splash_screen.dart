@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const HomePage()),
       );
@@ -23,12 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Siyah arkaplan
+      backgroundColor: Colors.black,
       body: Center(
         child: Image.asset(
           'assets/splash/image.png',
-          width: MediaQuery.of(context).size.width * 0.5, // Ekran genişliğinin yarısı kadar
-          height: MediaQuery.of(context).size.height * 0.5, // Ekran yüksekliğinin yarısı kadar
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.height * 0.5,
           fit: BoxFit.contain,
         ),
       ),

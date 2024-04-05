@@ -10,11 +10,9 @@ import 'home.dart';
 class AgentsPage extends StatelessWidget {
   const AgentsPage({Key? key});
 
-
   @override
   Widget build(BuildContext context) {
 
-    final double appBarFontSize = MediaQuery.of(context).size.width * 0.05;
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -37,7 +35,6 @@ class AgentsPage extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  // Ana sayfaya animasyonlu geçiş
                   Navigator.pushReplacement(
                     context,
                     SlidePageRoute(page: const HomePage()),
