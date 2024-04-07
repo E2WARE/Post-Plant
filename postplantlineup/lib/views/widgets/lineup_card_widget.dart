@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../models/lineups_model.dart';
+import '../screens/lineups_full_screen.dart';
 import '../utils/colors.dart';
 
 class LineupCardWidget extends StatelessWidget {
-  final String fieldName;
-  final List<String> urls;
-  final Function(List<String>) onTap;
+  final Lineup lineup;
+  final VoidCallback onTap;
 
   const LineupCardWidget({
     super.key,
-    required this.fieldName,
-    required this.urls,
+    required this.lineup,
     required this.onTap,
   });
 
@@ -18,7 +18,18 @@ class LineupCardWidget extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () => onTap(urls),
+      onTap: () {
+        List<String> imageUrls = lineup.lineupImageUrl.split(" , ");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FullScreenImagePage(
+              imageUrls: imageUrls,
+              description: lineup.lineupDescription,
+            ),
+          ),
+        );
+      },
       child: Card(
         elevation: 4,
         color: CustomColors.accentColor,
@@ -33,15 +44,25 @@ class LineupCardWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(size.width * 0.03),
                 child: Image.network(
-                  urls[0],
+                  lineup.lineupImageUrl,
                   fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          CustomColors.textColor, // Set custom color here
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(size.width * 0.02),
               child: Text(
-                fieldName,
+                lineup.lineupName,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: CustomColors.textColor,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:postplantlineup/views/screens/sites_dart.dart';
+import 'package:postplantlineup/views/screens/lineups.dart';
 import '../../view_models/agents_view_model.dart';
 import '../../view_models/map_view_model.dart';
 import '../utils/colors.dart';
@@ -23,7 +23,7 @@ class MapCardWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => SitesPage(
+            builder: (context) => LineupPage(
               mapCardViewModel: mapCardViewModel,
               agentCardViewModel: agentCardViewModel,
             ),

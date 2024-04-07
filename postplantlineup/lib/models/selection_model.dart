@@ -1,11 +1,9 @@
 class SelectionModel {
   String selectedAgent = '';
   String selectedMap = '';
-  String selectedSite = '';
 
-  void setSelections(String agentName, String mapName, String siteName) {
+  void setSelections(String agentName, String mapName) {
     selectedAgent = agentName;
     selectedMap = mapName;
-    selectedSite = siteName;
   }
 }

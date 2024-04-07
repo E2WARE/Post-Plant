@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
+import '../../models/lineups_model.dart';
+import '../widgets/lineup_card_widget.dart';
 
-class LineupGridWidget extends StatelessWidget {
-  final List<Widget> children;
+class LineupGridViewWidget extends StatelessWidget {
+  final List<Lineup> lineups;
 
-  const LineupGridWidget({super.key, required this.children});
+  const LineupGridViewWidget({
+    super.key,
+    required this.lineups,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    return GridView.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: size.width * 0.02,
-      mainAxisSpacing: size.width * 0.02,
-      childAspectRatio: 1.6 / 2,
-      children: children,
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, // Change the cross axis count as needed
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
+      ),
+      itemCount: lineups.length,
+      itemBuilder: (context, index) {
+        final lineup = lineups[index];
+        return LineupCardWidget(
+          lineup: lineup,
+          onTap: () {
+            // Handle tap event if needed
+          },
+        );
+      },
     );
   }
 }
