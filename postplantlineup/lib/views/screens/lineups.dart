@@ -47,10 +47,14 @@ class LineupPage extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            // Ana sayfaya animasyonlu geçiş
             Navigator.pushReplacement(
               context,
-              SlidePageRoute(page: SitesPage(agentCardViewModel: agentCardViewModel, mapCardViewModel: mapCardViewModel)),
+              SlidePageRoute(
+                page: SitesPage(
+                  agentCardViewModel: agentCardViewModel,
+                  mapCardViewModel: mapCardViewModel,
+                ),
+              ),
             );
           },
         ),
@@ -79,11 +83,11 @@ class LineupPage extends StatelessWidget {
       crossAxisCount: 2,
       crossAxisSpacing: 8.0,
       mainAxisSpacing: 8.0,
-      children: buildCards(data, (urls) => _showImageDialog(context, urls)),
+      children: buildCards(data, (urls, descriptions) => _showImageDialog(context, urls, descriptions)),
     );
   }
 
-  void _showImageDialog(BuildContext context, List<String> urls) {
+  void _showImageDialog(BuildContext context, List<String> urls, Map<String, String?> descriptions) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -92,6 +96,7 @@ class LineupPage extends StatelessWidget {
           agentName: agentCardViewModel.agent.name,
           mapName: mapCardViewModel.mapName,
           siteName: siteCardViewModel.site.siteName,
+          descriptions: descriptions,
         ),
       ),
     );

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
+import 'package:postplantlineup/views/utils/colors.dart';
 
 class FullScreenImagePage extends StatefulWidget {
   final List<String> urls;
   final String agentName;
   final String mapName;
   final String siteName;
+  final Map<String, String?> descriptions;
 
   const FullScreenImagePage({
     super.key,
@@ -13,6 +14,7 @@ class FullScreenImagePage extends StatefulWidget {
     required this.agentName,
     required this.mapName,
     required this.siteName,
+    required this.descriptions,
   });
 
   @override
@@ -20,8 +22,6 @@ class FullScreenImagePage extends StatefulWidget {
 }
 
 class _FullScreenImagePageState extends State<FullScreenImagePage> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     final appBarText = "${widget.agentName} - ${widget.mapName} - ${widget.siteName}";
@@ -51,7 +51,17 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
       body: PageView.builder(
         itemCount: widget.urls.length,
         itemBuilder: (context, index) {
-          return InteractiveViewer(
+          return _buildImageWithDescription(index);
+        },
+      ),
+    );
+  }
+
+  Widget _buildImageWithDescription(int index) {
+    return Column(
+      children: [
+        Expanded(
+          child: InteractiveViewer(
             boundaryMargin: const EdgeInsets.all(20.0),
             minScale: 0.1,
             maxScale: 4.0,
@@ -59,9 +69,22 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
               widget.urls[index],
               fit: BoxFit.contain,
             ),
-          );
-        },
-      ),
+          ),
+        ),
+        if (widget.descriptions.containsKey("Description ${index + 1}"))
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.descriptions["Description ${index + 1}"] ?? "",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: CustomColors.textColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
