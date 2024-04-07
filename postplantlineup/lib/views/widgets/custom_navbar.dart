@@ -54,6 +54,7 @@ class CustomNavbar extends StatelessWidget {
             AgentsPage(),
             DonationPage(),
             AdblockPage(),
+
           ],
         ),
       ),
