@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:postplantlineup/views/screens/lineups_full_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
 import '../../models/lineups_model.dart';
+import '../utils/favorite_manager.dart';
 
 class LineupCardWidget extends StatefulWidget {
   final Lineup lineup;
@@ -10,11 +10,11 @@ class LineupCardWidget extends StatefulWidget {
   final VoidCallback onTap;
 
   const LineupCardWidget({
-    Key? key,
+    super.key,
     required this.lineup,
     required this.imageUrls,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   _LineupCardWidgetState createState() => _LineupCardWidgetState();
@@ -30,23 +30,16 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
   }
 
   void _loadFavoriteStatus() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool favoriteStatus = prefs.getBool('favorite_${widget.lineup.lineupName}') ?? false;
-    bool favoriteStatusUrl = prefs.getBool('favorite_${widget.lineup.lineupImageUrl}') ?? false;
-    bool favoriteStatusDesc = prefs.getBool('favorite_${widget.lineup.lineupDescription}') ?? false;
-    print('Favorite status of ${widget.lineup.lineupName}: $favoriteStatus');
+    bool isCurrentlyFavorite = await FavoriteManager.isFavorite(widget.lineup);
     setState(() {
-      _isFavorite = favoriteStatus && favoriteStatusUrl && favoriteStatusDesc;
+      _isFavorite = isCurrentlyFavorite;
     });
   }
 
   void _toggleFavorite() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _isFavorite = !_isFavorite;
-      prefs.setBool('favorite_${widget.lineup.lineupName}', _isFavorite);
-      prefs.setBool('favorite_${widget.lineup.lineupImageUrl}', _isFavorite);
-      prefs.setBool('favorite_${widget.lineup.lineupDescription}', _isFavorite);
+      FavoriteManager.toggleFavorite(widget.lineup);
       print('Favorite status of ${widget.lineup.lineupName} updated to: $_isFavorite');
     });
   }

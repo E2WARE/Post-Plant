@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.1.2
   curved_navigation_bar: ^1.0.3
   photo_view: ^0.14.0
+  shared_preferences: ^2.2.3
 
 
 dev_dependencies:

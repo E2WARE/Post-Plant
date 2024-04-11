@@ -12,11 +12,11 @@ class CustomNavbar extends StatelessWidget {
   final PageController pageController;
 
   const CustomNavbar({
-    super.key,
+    Key? key,
     required this.currentIndex,
     required this.onTabTapped,
     required this.pageController,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,9 @@ class CustomNavbar extends StatelessWidget {
         backgroundColor: CustomColors.primaryColor,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 400),
-        onTap: onTabTapped,
+        onTap: (index) {
+          pageController.jumpToPage(index);
+        },
         index: currentIndex,
       ),
       body: SizedBox(
@@ -54,7 +56,6 @@ class CustomNavbar extends StatelessWidget {
             AgentsPage(),
             DonationPage(),
             AdblockPage(),
-
           ],
         ),
       ),
