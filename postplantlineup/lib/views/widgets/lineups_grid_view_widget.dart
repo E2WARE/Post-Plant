@@ -24,9 +24,6 @@ class LineupGridViewWidget extends StatelessWidget {
         return LineupCardWidget(
           imageUrls: const [], // Pass the imageUrls parameter here
           lineup: lineup,
-          onTap: () {
-            // Handle tap event if needed
-          },
         );
       },
     );

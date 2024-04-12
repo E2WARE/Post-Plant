@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:postplantlineup/views/utils/google_ads.dart';
 import '../utils/colors.dart';
 import '../../data/agents_data_service.dart';
 import '../../models/agents_model.dart';
@@ -7,8 +11,40 @@ import '../utils/slide_page_route.dart';
 import '../widgets/agents_grid_view_widget.dart';
 import 'home.dart';
 
-class AgentsPage extends StatelessWidget {
-  const AgentsPage({Key? key});
+class AgentsPage extends StatefulWidget {
+  const AgentsPage({Key? key}) : super(key: key);
+
+  @override
+  State<AgentsPage> createState() => _AgentsPageState();
+}
+
+class _AgentsPageState extends State<AgentsPage> {
+  final GoogleAds _googleAds = GoogleAds();
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _showInitialInterstitialAd();
+    _googleAds.loadBannerAd();
+    _timer = Timer.periodic(const Duration(minutes: 3), (timer) {
+      _showInterstitialAd();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _showInitialInterstitialAd() {
+    _googleAds.loadInterstitalAd(showAfterLoad: true);
+  }
+
+  void _showInterstitialAd() {
+    _googleAds.loadInterstitalAd(showAfterLoad: true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +77,23 @@ class AgentsPage extends StatelessWidget {
               ),
             ),
             backgroundColor: CustomColors.primaryColor,
-            body: AgentsGridViewWidget(
-              agents: snapshot.data!,
-              onAgentSelected: (String agentName) {
-                // Handle agent selection
-              },
+            body: Column(
+              children: [
+                Expanded(
+                  child: AgentsGridViewWidget(
+                    agents: snapshot.data!,
+                    onAgentSelected: (String agentName) {
+                      // Handle agent selection
+                    },
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  width: 468,
+                  color: CustomColors.primaryColor,
+                  child: AdWidget(ad: _googleAds.bannerAd),
+                ),
+              ],
             ),
           );
         } else if (snapshot.hasError) {

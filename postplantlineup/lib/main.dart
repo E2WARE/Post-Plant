@@ -5,9 +5,12 @@ import 'package:postplantlineup/views/screens/add.dart';
 import 'package:postplantlineup/views/screens/splash_screen.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
 import 'firebase_options.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
 
   // SharedPreferences başlatılıyor
   await SharedPreferences.getInstance();

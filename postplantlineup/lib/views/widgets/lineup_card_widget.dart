@@ -1,20 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:postplantlineup/views/screens/lineups_full_screen.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
+import 'package:postplantlineup/views/utils/google_ads.dart'; // GoogleAds sınıfını ekledik
 import '../../models/lineups_model.dart';
 import '../utils/favorite_manager.dart';
 
 class LineupCardWidget extends StatefulWidget {
   final Lineup lineup;
   final List<String> imageUrls;
-  final VoidCallback onTap;
 
   const LineupCardWidget({
-    super.key,
+    Key? key,
     required this.lineup,
     required this.imageUrls,
-    required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   _LineupCardWidgetState createState() => _LineupCardWidgetState();
@@ -22,11 +23,26 @@ class LineupCardWidget extends StatefulWidget {
 
 class _LineupCardWidgetState extends State<LineupCardWidget> {
   late bool _isFavorite;
+  late Timer _adTimer; // Timer'ı tanımladık
+  bool _adShown = false; // Reklamın gösterilip gösterilmediğini takip etmek için bir değişken tanımladık
 
   @override
   void initState() {
     super.initState();
     _loadFavoriteStatus();
+
+    // Timer'ı başlat
+    _adTimer = Timer.periodic(const Duration(minutes: 3), (timer) {
+      setState(() {
+        _adShown = false; // 3 dakika dolduğunda reklam tekrar gösterilebilsin diye _adShown değişkenini sıfırla
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _adTimer.cancel(); // Timer'ı dispose et
+    super.dispose();
   }
 
   void _loadFavoriteStatus() async {
@@ -44,22 +60,25 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
     });
   }
 
+  void _showInterstitialAd() {
+    if (!_adShown) {
+      GoogleAds().loadInterstitalAd(showAfterLoad: true); // Reklamı yükle ve göster
+      setState(() {
+        _adShown = true; // Reklamın gösterildiğini işaretle
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
       onTap: () {
-        List<String> imageUrls = widget.lineup.lineupImageUrl.split(" , ");
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FullScreenImagePage(
-              imageUrls: imageUrls,
-              description: widget.lineup.lineupDescription,
-            ),
-          ),
-        );
+        if (!_adShown) {
+          _showInterstitialAd(); // Her tıklamada reklamı kontrol et
+        }
+        _navigateToFullScreenPage();
       },
       child: SizedBox(
         height: size.width * 0.5,
@@ -125,6 +144,19 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void _navigateToFullScreenPage() {
+    List<String> imageUrls = widget.lineup.lineupImageUrl.split(" , ");
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FullScreenImagePage(
+          imageUrls: imageUrls,
+          description: widget.lineup.lineupDescription,
         ),
       ),
     );
