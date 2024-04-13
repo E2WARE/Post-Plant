@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
+import '../utils/banner_ad_widget.dart';
 
 class FullScreenImagePage extends StatelessWidget {
   final List<String> imageUrls;
@@ -84,6 +85,7 @@ class FullScreenImagePage extends StatelessWidget {
               ],
             ),
           ),
+          const BannerAdWidget(),
         ],
       ),
     );

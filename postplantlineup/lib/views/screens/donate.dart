@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/banner_ad_widget.dart';
 import '../utils/colors.dart';
 
 class DonationPage extends StatelessWidget {
@@ -8,7 +9,6 @@ class DonationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -17,15 +17,13 @@ class DonationPage extends StatelessWidget {
         ),
         backgroundColor: CustomColors.primaryColor,
       ),
-      body: Container(
-        color: CustomColors.primaryColor, // Set your background color here
-        child: Center(
-          child: SizedBox(
-            width: screenSize.width * 0.8,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SingleChildScrollView(
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: CustomColors.primaryColor,
+              child: Center(
+                child: SingleChildScrollView(
                   child: Container(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
@@ -87,11 +85,13 @@ class DonationPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+          const BannerAdWidget(), // Placed at the end of the Column
+        ],
       ),
     );
+
   }
 }

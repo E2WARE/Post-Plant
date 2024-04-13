@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
 import '../../data/favorites_lineup_service.dart';
 import '../../models/lineups_model.dart';
+import '../utils/banner_ad_widget.dart';
 import '../widgets/lineup_card_widget.dart';
 
 class FavoriteLineupsPage extends StatefulWidget {
-  const FavoriteLineupsPage({super.key});
+  // ignore: use_key_in_widget_constructors
+  const FavoriteLineupsPage({Key? key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -32,7 +34,6 @@ class _FavoriteLineupsPageState extends State<FavoriteLineupsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Determine the number of cross-axis items based on screen size
     final crossAxisCount = MediaQuery.of(context).size.width > 600 ? 4 : 2;
 
     return Scaffold(
@@ -44,30 +45,37 @@ class _FavoriteLineupsPageState extends State<FavoriteLineupsPage> {
         backgroundColor: CustomColors.primaryColor,
       ),
       backgroundColor: CustomColors.primaryColor,
-      body: _favoriteLineups.isEmpty
-          ? Center(
-        child: Text(
-          'No favorite lineups found.',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: MediaQuery.of(context).size.width > 600 ? 24.0 : 16.0,
+      body: Column(
+        children: [
+          Expanded(
+            child: _favoriteLineups.isEmpty
+                ? Center(
+              child: Text(
+                'No favorite lineups found.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width > 600 ? 24.0 : 16.0,
+                ),
+              ),
+            )
+                : GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
+              itemCount: _favoriteLineups.length,
+              itemBuilder: (context, index) {
+                final lineup = _favoriteLineups[index];
+                return LineupCardWidget(
+                  lineup: lineup,
+                  imageUrls: const [],
+                );
+              },
+            ),
           ),
-        ),
-      )
-          : GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-        ),
-        itemCount: _favoriteLineups.length,
-        itemBuilder: (context, index) {
-          final lineup = _favoriteLineups[index];
-          return LineupCardWidget(
-            lineup: lineup,
-            imageUrls: const [],
-          );
-        },
+          const BannerAdWidget(),
+        ],
       ),
     );
   }

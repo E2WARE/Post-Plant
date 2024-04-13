@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:postplantlineup/views/screens/splash_screen.dart';
+import 'package:postplantlineup/views/utils/banner_ad_widget.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
 import 'firebase_options.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,11 +14,15 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  const BannerAdWidget bannerAdWidget = BannerAdWidget();
+  bannerAdWidget.createState().initState();
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // ignore: use_key_in_widget_constructors
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,15 @@ class MyApp extends StatelessWidget {
           bodyLarge: TextStyle(color: CustomColors.textColor),
         ),
       ),
-      home: const SplashScreen(),
+      home: const Scaffold(
+        body: Column(
+          children: [
+            Expanded(
+              child: SplashScreen(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

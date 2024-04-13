@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:postplantlineup/views/utils/google_ads.dart';
+import '../utils/banner_ad_widget.dart';
 import '../utils/colors.dart';
 import '../../data/agents_data_service.dart';
 import '../../models/agents_model.dart';
@@ -26,8 +26,7 @@ class _AgentsPageState extends State<AgentsPage> {
   void initState() {
     super.initState();
     _showInitialInterstitialAd();
-    _googleAds.loadBannerAd();
-    _timer = Timer.periodic(const Duration(minutes: 3), (timer) {
+    _timer = Timer.periodic(const Duration(minutes: 5), (timer) {
       _showInterstitialAd();
     });
   }
@@ -87,12 +86,7 @@ class _AgentsPageState extends State<AgentsPage> {
                     },
                   ),
                 ),
-                Container(
-                  height: 60,
-                  width: 468,
-                  color: CustomColors.primaryColor,
-                  child: AdWidget(ad: _googleAds.bannerAd),
-                ),
+                const BannerAdWidget(),
               ],
             ),
           );

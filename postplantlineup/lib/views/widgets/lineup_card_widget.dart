@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:postplantlineup/views/screens/lineups_full_screen.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
-import 'package:postplantlineup/views/utils/google_ads.dart';
 import '../../data/favorites_lineup_service.dart';
 import '../../models/lineups_model.dart';
 
@@ -22,25 +20,12 @@ class LineupCardWidget extends StatefulWidget {
 }
 
 class _LineupCardWidgetState extends State<LineupCardWidget> {
-  late Timer _adTimer;
-  bool _adShown = false;
   bool _isFavorite = false;
 
   @override
   void initState() {
     super.initState();
-    _adTimer = Timer.periodic(const Duration(minutes: 3), (timer) {
-      setState(() {
-        _adShown = false;
-      });
-    });
     _checkFavorite();
-  }
-
-  @override
-  void dispose() {
-    _adTimer.cancel();
-    super.dispose();
   }
 
   void _checkFavorite() async {
@@ -57,24 +42,12 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
     });
   }
 
-  void _showInterstitialAd() {
-    if (!_adShown) {
-      GoogleAds().loadInterstitalAd(showAfterLoad: true);
-      setState(() {
-        _adShown = true;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
       onTap: () {
-        if (!_adShown) {
-          _showInterstitialAd();
-        }
         _navigateToFullScreenPage();
       },
       child: Card(
@@ -121,6 +94,7 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
                         color: CustomColors.textColor,
                         fontWeight: FontWeight.bold,
                         fontSize: size.width * 0.044,
+
                       ),
                     ),
                   ),

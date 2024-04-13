@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../utils/banner_ad_widget.dart';
 import '../utils/colors.dart';
 import '../widgets/custom_navbar.dart';
 import '../widgets/main_image_widget.dart';
@@ -67,7 +68,7 @@ class HomePageContent extends StatelessWidget {
           child: Container(
             color: CustomColors.primaryColor,
           ),
-        ),
+        ), const BannerAdWidget(),
       ],
     );
   }
