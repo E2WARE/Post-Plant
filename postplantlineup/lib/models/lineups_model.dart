@@ -10,4 +10,13 @@ class Lineup {
     required this.lineupImageUrl,
     required this.siteName,
   });
+
+  factory Lineup.fromJson(Map<String, dynamic> json) {
+    return Lineup(
+      lineupName: json['lineupName'],
+      lineupDescription: json['lineupDescription'],
+      lineupImageUrl: json['lineupImageUrl'],
+      siteName: json['siteName'],
+    );
+  }
 }

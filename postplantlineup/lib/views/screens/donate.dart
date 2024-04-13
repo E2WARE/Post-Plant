@@ -10,6 +10,13 @@ class DonationPage extends StatelessWidget {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Donate',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: CustomColors.primaryColor,
+      ),
       body: Container(
         color: CustomColors.primaryColor, // Set your background color here
         child: Center(

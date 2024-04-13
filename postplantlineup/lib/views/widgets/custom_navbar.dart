@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../screens/adblock.dart';
 import '../screens/agents.dart';
 import '../screens/donate.dart';
+import '../screens/favorites.dart';
 import '../screens/home.dart';
 import '../utils/colors.dart';
 
@@ -56,6 +57,7 @@ class CustomNavbar extends StatelessWidget {
             AgentsPage(),
             DonationPage(),
             AdblockPage(),
+            FavoriteLineupsPage(),
           ],
         ),
       ),
