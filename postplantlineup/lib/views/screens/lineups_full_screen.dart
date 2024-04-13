@@ -33,57 +33,56 @@ class FullScreenImagePage extends StatelessWidget {
           },
         ),
       ),
-      body: Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Positioned.fill(
-            child: Container(
-              color: CustomColors.primaryColor,
-              child: Center(
-                child: SizedBox(
-                  child: Image.network(
-                    imageUrls.first,
-                    fit: BoxFit.cover,
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Container(
+                    color: CustomColors.primaryColor,
+                    child: Center(
+                      child: PageView.builder(
+                        itemCount: imageUrls.length,
+                        itemBuilder: (context, index) {
+                          return PhotoView(
+                            imageProvider: NetworkImage(imageUrls[index]),
+                            minScale: PhotoViewComputedScale.contained,
+                            maxScale: PhotoViewComputedScale.covered * 2,
+                            initialScale: PhotoViewComputedScale.contained,
+                            loadingBuilder: (context, event) => const Center(
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(CustomColors.textColor), // Set custom color for loading icon
+                              ),
+                            ),
+                            backgroundDecoration: const BoxDecoration(
+                              color: CustomColors.primaryColor, // Set the background color here
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: EdgeInsets.all(size.width * 0.04),
+                    child: Text(
+                      description,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.04,
+                        color: CustomColors.textColor, // Set the text color to white
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  itemCount: imageUrls.length,
-                  itemBuilder: (context, index) {
-                    return PhotoView(
-                      imageProvider: NetworkImage(imageUrls[index]),
-                      minScale: PhotoViewComputedScale.contained,
-                      maxScale: PhotoViewComputedScale.covered * 2,
-                      initialScale: PhotoViewComputedScale.contained,
-                      loadingBuilder: (context, event) => const Center(
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(CustomColors.textColor), // Set custom color for loading icon
-                        ),
-                      ),
-                      backgroundDecoration: const BoxDecoration(
-                        color: CustomColors.primaryColor, // Set the background color here
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(size.width * 0.04),
-                child: Text(
-                  description,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: size.width * 0.04,
-                    color: CustomColors.textColor, // Set the text color to white
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),

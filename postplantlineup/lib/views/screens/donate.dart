@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 
 class DonationPage extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const DonationPage({Key? key});
 
   @override

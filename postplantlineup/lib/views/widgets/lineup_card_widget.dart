@@ -1,70 +1,50 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:postplantlineup/views/screens/lineups_full_screen.dart';
 import 'package:postplantlineup/views/utils/colors.dart';
-import 'package:postplantlineup/views/utils/google_ads.dart'; // GoogleAds sınıfını ekledik
+import 'package:postplantlineup/views/utils/google_ads.dart';
 import '../../models/lineups_model.dart';
-import '../utils/favorite_manager.dart';
 
 class LineupCardWidget extends StatefulWidget {
   final Lineup lineup;
   final List<String> imageUrls;
 
   const LineupCardWidget({
-    Key? key,
+    super.key,
     required this.lineup,
     required this.imageUrls,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _LineupCardWidgetState createState() => _LineupCardWidgetState();
 }
 
 class _LineupCardWidgetState extends State<LineupCardWidget> {
-  late bool _isFavorite;
-  late Timer _adTimer; // Timer'ı tanımladık
-  bool _adShown = false; // Reklamın gösterilip gösterilmediğini takip etmek için bir değişken tanımladık
+  late Timer _adTimer;
+  bool _adShown = false;
 
   @override
   void initState() {
     super.initState();
-    _loadFavoriteStatus();
-
-    // Timer'ı başlat
     _adTimer = Timer.periodic(const Duration(minutes: 3), (timer) {
       setState(() {
-        _adShown = false; // 3 dakika dolduğunda reklam tekrar gösterilebilsin diye _adShown değişkenini sıfırla
+        _adShown = false;
       });
     });
   }
 
   @override
   void dispose() {
-    _adTimer.cancel(); // Timer'ı dispose et
+    _adTimer.cancel();
     super.dispose();
-  }
-
-  void _loadFavoriteStatus() async {
-    bool isCurrentlyFavorite = await FavoriteManager.isFavorite(widget.lineup);
-    setState(() {
-      _isFavorite = isCurrentlyFavorite;
-    });
-  }
-
-  void _toggleFavorite() async {
-    setState(() {
-      _isFavorite = !_isFavorite;
-      FavoriteManager.toggleFavorite(widget.lineup);
-      print('Favorite status of ${widget.lineup.lineupName} updated to: $_isFavorite');
-    });
   }
 
   void _showInterstitialAd() {
     if (!_adShown) {
-      GoogleAds().loadInterstitalAd(showAfterLoad: true); // Reklamı yükle ve göster
+      GoogleAds().loadInterstitalAd(showAfterLoad: true);
       setState(() {
-        _adShown = true; // Reklamın gösterildiğini işaretle
+        _adShown = true;
       });
     }
   }
@@ -76,74 +56,56 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
     return GestureDetector(
       onTap: () {
         if (!_adShown) {
-          _showInterstitialAd(); // Her tıklamada reklamı kontrol et
+          _showInterstitialAd();
         }
         _navigateToFullScreenPage();
       },
-      child: SizedBox(
-        height: size.width * 0.5,
-        child: Card(
-          elevation: 4,
-          color: CustomColors.accentColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(size.width * 0.03),
-            side: const BorderSide(color: CustomColors.accentColor),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                height: size.width * 0.3,
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(size.width * 0.03),
-                      child: Image.network(
-                        widget.lineup.lineupImageUrl,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                CustomColors.textColor,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Positioned(
-                      top: size.width * 0.02,
-                      right: size.width * 0.02,
-                      child: GestureDetector(
-                        onTap: () {
-                          _toggleFavorite();
-                        },
-                        child: Icon(
-                          _isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: _isFavorite ? CustomColors.primaryColor : CustomColors.textColor,
-                          size: size.width * 0.07,
+
+      child: Card(
+        elevation: 4,
+        color: CustomColors.accentColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(size.width * 0.03),
+          side: const BorderSide(color: CustomColors.accentColor),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // ignore: sized_box_for_whitespace
+            Container(
+              height: size.width * 0.3,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(size.width * 0.03),
+                child: Image.network(
+                  widget.lineup.lineupImageUrl,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          CustomColors.textColor,
                         ),
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-                child: Text(
-                  widget.lineup.lineupName,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: CustomColors.textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: size.width * 0.04,
-                  ),
+            ),
+            SizedBox(height: size.width * 0.02),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+              child: Text(
+                widget.lineup.lineupName,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: CustomColors.textColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: size.width * 0.044,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

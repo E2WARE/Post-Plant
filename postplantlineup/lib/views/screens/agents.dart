@@ -12,7 +12,7 @@ import '../widgets/agents_grid_view_widget.dart';
 import 'home.dart';
 
 class AgentsPage extends StatefulWidget {
-  const AgentsPage({Key? key}) : super(key: key);
+  const AgentsPage({super.key});
 
   @override
   State<AgentsPage> createState() => _AgentsPageState();

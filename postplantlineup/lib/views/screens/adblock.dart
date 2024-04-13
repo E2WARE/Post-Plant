@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 
 class AdblockPage extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const AdblockPage({Key? key});
 
   @override

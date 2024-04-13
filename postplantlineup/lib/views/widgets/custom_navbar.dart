@@ -12,11 +12,11 @@ class CustomNavbar extends StatelessWidget {
   final PageController pageController;
 
   const CustomNavbar({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onTabTapped,
     required this.pageController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
