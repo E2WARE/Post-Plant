@@ -14,7 +14,7 @@ class LineupGridViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Change the cross axis count as needed
+        crossAxisCount: 2,
         crossAxisSpacing: 8.0,
         mainAxisSpacing: 8.0,
       ),
@@ -22,7 +22,7 @@ class LineupGridViewWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final lineup = lineups[index];
         return LineupCardWidget(
-          imageUrls: const [], // Pass the imageUrls parameter here
+          imageUrls: const [],
           lineup: lineup,
         );
       },
