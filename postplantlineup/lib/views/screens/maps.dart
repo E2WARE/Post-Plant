@@ -7,7 +7,6 @@ import '../../models/maps_model.dart';
 import '../../view_models/agents_view_model.dart';
 import '../utils/slide_page_route.dart';
 import '../widgets/maps_grid_view_widget.dart';
-import '../utils/banner_ad_widget.dart';
 
 class MapsPage extends StatelessWidget {
   final AgentCardViewModel agentCardViewModel;
@@ -60,15 +59,10 @@ class MapsPage extends StatelessWidget {
                 ),
               ),
               backgroundColor: CustomColors.primaryColor,
-              body: Column(
-                children: [
-                  MapsGridViewWidget(
-                    maps: snapshot.data!,
-                    onMapSelected: (String mapName) {},
-                    agentCardViewModel: agentCardViewModel,
-                  ),
-                  const BannerAdWidget(),
-                ],
+              body: MapsGridViewWidget(
+                maps: snapshot.data!,
+                onMapSelected: (String mapName) {},
+                agentCardViewModel: agentCardViewModel,
               ),
             ),
           );

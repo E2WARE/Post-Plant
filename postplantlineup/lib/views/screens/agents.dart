@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:postplantlineup/views/utils/google_ads.dart';
 import '../utils/banner_ad_widget.dart';
 import '../utils/colors.dart';
 import '../../data/agents_data_service.dart';
@@ -19,31 +16,7 @@ class AgentsPage extends StatefulWidget {
 }
 
 class _AgentsPageState extends State<AgentsPage> {
-  final GoogleAds _googleAds = GoogleAds();
-  late Timer _timer;
 
-  @override
-  void initState() {
-    super.initState();
-    _showInitialInterstitialAd();
-    _timer = Timer.periodic(const Duration(minutes: 5), (timer) {
-      _showInterstitialAd();
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void _showInitialInterstitialAd() {
-    _googleAds.loadInterstitalAd(showAfterLoad: true);
-  }
-
-  void _showInterstitialAd() {
-    _googleAds.loadInterstitalAd(showAfterLoad: true);
-  }
 
   @override
   Widget build(BuildContext context) {

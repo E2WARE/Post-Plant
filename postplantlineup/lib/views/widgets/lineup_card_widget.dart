@@ -15,7 +15,6 @@ class LineupCardWidget extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _LineupCardWidgetState createState() => _LineupCardWidgetState();
 }
 
@@ -60,52 +59,52 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: size.width * 0.3,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(size.width * 0.03),
-                child: Image.network(
-                  widget.lineup.lineupImageUrl,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          CustomColors.textColor,
-                        ),
-                      ),
-                    );
-                  },
+            Stack(
+              children: [
+                SizedBox(
+                  height: size.width * 0.3,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(size.width * 0.03),
+                    child: Image.network(
+                      widget.lineup.lineupImageUrl,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              CustomColors.textColor,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: size.width * 0.02,
+                  right: size.width * 0.02,
+                  child: IconButton(
+                    icon: Icon(
+                      _isFavorite ? Icons.favorite : Icons.favorite_outline_outlined,
+                      color: _isFavorite ? CustomColors.accentColor : CustomColors.accentColor,
+                    ),
+                    onPressed: _toggleFavorite,
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: size.width * 0.02),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.lineup.lineupName,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: CustomColors.textColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: size.width * 0.044,
-
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      _isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: _isFavorite ? CustomColors.primaryColor : null,
-                    ),
-                    onPressed: _toggleFavorite,
-                  ),
-                ],
+              child: Text(
+                widget.lineup.lineupName,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: CustomColors.textColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: size.width * 0.044,
+                ),
               ),
             ),
           ],
@@ -126,4 +125,5 @@ class _LineupCardWidgetState extends State<LineupCardWidget> {
       ),
     );
   }
+
 }

@@ -4,7 +4,6 @@ import '../../data/lineups_data_service.dart';
 import '../../models/lineups_model.dart';
 import '../../view_models/agents_view_model.dart';
 import '../../view_models/map_view_model.dart';
-import '../utils/banner_ad_widget.dart';
 import '../utils/colors.dart';
 import '../utils/slide_page_route.dart';
 import '../widgets/lineups_grid_view_widget.dart';
@@ -72,7 +71,6 @@ class LineupPage extends StatelessWidget {
               },
             ),
           ),
-          const BannerAdWidget(),
         ],
       ),
     );

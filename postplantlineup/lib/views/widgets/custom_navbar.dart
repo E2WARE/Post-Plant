@@ -24,15 +24,15 @@ class CustomNavbar extends StatelessWidget {
     const double bottomNavigationBarHeight = kBottomNavigationBarHeight;
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
-    final iconSize = MediaQuery.of(context).size.width * 0.07; // 6% of the screen width
+    final iconSize = MediaQuery.of(context).size.width * 0.08; // 6% of the screen width
 
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         items: <Widget>[
           Icon(Icons.home, size: iconSize,color: Colors.white, ),
-          Icon(Icons.accessibility_new_outlined, size: iconSize, color: Colors.white,),
-          Icon(Icons.account_balance_wallet_outlined, size: iconSize,color: Colors.white,),
-          Icon(Icons.adb, size: iconSize,color: Colors.white,),
+          Image.asset('assets/utils_images/lineuppage.png', width: iconSize, height: iconSize, color: Colors.white),
+          Icon(Icons.account_balance_wallet, size: iconSize,color: Colors.white,),
+          Image.asset('assets/utils_images/ads.png', width: iconSize, height: iconSize, color: Colors.white),
           Icon(Icons.favorite, size: iconSize,color: Colors.white,),
         ],
         color: CustomColors.accentColor,
